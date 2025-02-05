@@ -1,0 +1,13 @@
+CREATE TABLE recipes (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE ingredients (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    recipe_id BIGINT NOT NULL,
+    ingredient_name VARCHAR(255) NOT NULL,
+    quantity DECIMAL(10, 2) NOT NULL,
+    unit VARCHAR(50),
+    FOREIGN KEY (recipe_id) REFERENCES recipes(id) ON DELETE CASCADE
+);
