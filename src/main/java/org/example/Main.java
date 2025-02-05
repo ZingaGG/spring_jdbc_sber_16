@@ -21,20 +21,21 @@ public class Main {
             System.out.println("2. Search Recipes by Name");
             System.out.println("3. Delete Recipe");
             System.out.println("4. All recipes");
-            System.out.println("5. Exit");
+            System.out.println("5. Add Ingredient to Recipe");
+            System.out.println("6. Get Recipe with Ingredients");
+            System.out.println("7. Exit");
 
             int choice = scanner.nextInt();
             scanner.nextLine();
 
             switch (choice) {
-                case 1:
+                case 1 -> {
                     System.out.print("Enter recipe name: ");
                     String name = scanner.nextLine();
                     recipeService.addRecipe(name);
                     System.out.println("Recipe added successfully.");
-                    break;
-
-                case 2:
+                }
+                case 2 -> {
                     System.out.print("Enter part of recipe name to search: ");
                     String namePart = scanner.nextLine();
                     List<Recipe> recipes = recipeService.searchRecipesByName(namePart);
@@ -45,32 +46,52 @@ public class Main {
                             System.out.println(recipe);
                         }
                     }
-                    break;
-
-                case 3:
+                }
+                case 3 -> {
                     System.out.print("Enter recipe ID to delete: ");
                     long recipeId = scanner.nextLong();
                     recipeService.deleteRecipe(recipeId);
                     System.out.println("Recipe deleted successfully.");
-                    break;
-
-                case 4:
+                }
+                case 4 -> {
                     List<Recipe> allRecipes = recipeService.getAllRecipes();
-                    if(allRecipes.isEmpty()){
+                    if (allRecipes.isEmpty()) {
                         System.out.println("No recipes found.");
                     } else {
-                        for (Recipe recipe : allRecipes){
+                        for (Recipe recipe : allRecipes) {
                             System.out.println(recipe);
                         }
                     }
-                    break;
+                }
+                case 5 -> {
+                    System.out.print("Enter recipe ID: ");
+                    long recipeId = scanner.nextLong();
+                    scanner.nextLine();
+                    System.out.print("Enter ingredient name: ");
+                    String ingredientName = scanner.nextLine();
+                    System.out.print("Enter quantity: ");
+                    double quantity = scanner.nextDouble();
+                    scanner.nextLine();
+                    recipeService.addIngredientToRecipe(recipeId, ingredientName, quantity);
+                    System.out.println("Ingredient added successfully.");
+                }
 
-                case 5:
+                case 6 -> {
+                    System.out.print("Enter recipe ID to get with ingredients: ");
+                    long id = scanner.nextLong();
+                    Recipe recipe = recipeService.getRecipeWithIngredients(id);
+                    if (recipe == null) {
+                        System.out.println("Recipe not found.");
+                    } else {
+                        System.out.println(recipe);
+                    }
+                }
+
+                case 7 -> {
                     System.out.println("Exiting...");
                     return;
-
-                default:
-                    System.out.println("Invalid option.");
+                }
+                default -> System.out.println("Invalid option.");
             }
         }
     }
