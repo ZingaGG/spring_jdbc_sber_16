@@ -10,11 +10,9 @@ import lombok.ToString;
 public class Ingredient {
     private String name;
     private double quantity;
-    private String unit;
 
-    public Ingredient(String name, double quantity, String unit) {
+    public Ingredient(String name, double quantity) {
         this.name = name;
         this.quantity = quantity;
-        this.unit = unit;
     }
 }

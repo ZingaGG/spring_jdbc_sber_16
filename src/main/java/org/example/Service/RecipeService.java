@@ -30,4 +30,12 @@ public class RecipeService {
     public void deleteRecipe(long recipeId) {
         recipeDAO.deleteRecipe(recipeId);
     }
+
+    public Recipe getRecipeWithIngredients(long recipeId) {
+        return recipeDAO.getRecipeWithIngredients(recipeId);
+    }
+
+    public void addIngredientToRecipe(long recipeId, String ingredientName, double quantity) {
+        recipeDAO.addIngredientToRecipe(recipeId, ingredientName, quantity);
+    }
 }
