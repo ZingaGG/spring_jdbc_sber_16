@@ -8,6 +8,5 @@ CREATE TABLE IF NOT EXISTS ingredients (
     recipe_id BIGINT NOT NULL,
     ingredient_name VARCHAR(255) NOT NULL,
     quantity DECIMAL(10, 2) NOT NULL,
-    unit VARCHAR(50),
     FOREIGN KEY (recipe_id) REFERENCES recipes(id) ON DELETE CASCADE
 );
