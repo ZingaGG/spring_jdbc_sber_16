@@ -35,6 +35,11 @@ public class RecipeDAO {
         jdbcTemplate.update(deleteRecipeSql, recipeId);
     }
 
+    public List<Recipe> getAllRecipes(){
+        String sql = "SELECT * FROM recipes";
+        return jdbcTemplate.query(sql, new RecipeRowMapper());
+    }
+
     private static class RecipeRowMapper implements RowMapper<Recipe> {
         @Override
         public Recipe mapRow(ResultSet rs, int rowNum) throws SQLException {

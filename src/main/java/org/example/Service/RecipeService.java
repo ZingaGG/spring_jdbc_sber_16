@@ -21,6 +21,8 @@ public class RecipeService {
         recipeDAO.addRecipe(name);
     }
 
+    public List<Recipe> getAllRecipes() { return recipeDAO.getAllRecipes(); }
+
     public List<Recipe> searchRecipesByName(String namePart) {
         return recipeDAO.searchRecipesByName(namePart);
     }

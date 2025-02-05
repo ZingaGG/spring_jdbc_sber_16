@@ -20,7 +20,8 @@ public class Main {
             System.out.println("1. Add Recipe");
             System.out.println("2. Search Recipes by Name");
             System.out.println("3. Delete Recipe");
-            System.out.println("4. Exit");
+            System.out.println("4. All recipes");
+            System.out.println("5. Exit");
 
             int choice = scanner.nextInt();
             scanner.nextLine();
@@ -54,6 +55,17 @@ public class Main {
                     break;
 
                 case 4:
+                    List<Recipe> allRecipes = recipeService.getAllRecipes();
+                    if(allRecipes.isEmpty()){
+                        System.out.println("No recipes found.");
+                    } else {
+                        for (Recipe recipe : allRecipes){
+                            System.out.println(recipe);
+                        }
+                    }
+                    break;
+
+                case 5:
                     System.out.println("Exiting...");
                     return;
 
