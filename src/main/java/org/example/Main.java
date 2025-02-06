@@ -72,17 +72,16 @@ public class Main {
                     System.out.print("Enter quantity: ");
                     double quantity = scanner.nextDouble();
                     scanner.nextLine();
-                    recipeService.addIngredientToRecipe(recipeId, ingredientName, quantity);
-                    System.out.println("Ingredient added successfully.");
+                    if (recipeService.addIngredientToRecipe(recipeId, ingredientName, quantity)){
+                        System.out.println("Ingredient added successfully.");
+                    }
                 }
 
                 case 6 -> {
                     System.out.print("Enter recipe ID to get with ingredients: ");
                     long id = scanner.nextLong();
-                    Recipe recipe = recipeService.getRecipeWithIngredients(id);
-                    if (recipe == null) {
-                        System.out.println("Recipe not found.");
-                    } else {
+                    Recipe recipe = recipeService.getRecipeById(id);
+                    if (recipe != null) {
                         System.out.println(recipe);
                     }
                 }

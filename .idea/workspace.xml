@@ -47,6 +47,7 @@
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
+    "spring.configuration.checksum": "29f407bcdbcde7221682f7af39fed78f",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -58,7 +59,8 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1738740057581</updated>
-      <workItem from="1738761898588" duration="1896000" />
+      <workItem from="1738761898588" duration="2489000" />
+      <workItem from="1738853859528" duration="2735000" />
     </task>
     <task id="LOCAL-00001" summary="Added getAllRecipes">
       <created>1738762679855</created>
@@ -74,14 +76,56 @@
       <option name="project" value="LOCAL" />
       <updated>1738762692161</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Unit field deleted, DAO and Service adjusted to work with Ingredients">
+      <created>1738764064677</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1738764064677</updated>
+    </task>
+    <task id="LOCAL-00004" summary="new cases to work with ingredients">
+      <created>1738764079753</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1738764079753</updated>
+    </task>
+    <task id="LOCAL-00005" summary="deleted &quot;Unit&quot; raw">
+      <created>1738764092165</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1738764092165</updated>
+    </task>
+    <task id="LOCAL-00006" summary="small changes">
+      <created>1738764097996</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1738764097996</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Added getAllRecipes" />
+    <MESSAGE value="Unit field deleted, DAO and Service adjusted to work with Ingredients" />
+    <MESSAGE value="new cases to work with ingredients" />
+    <MESSAGE value="deleted &quot;Unit&quot; raw" />
     <MESSAGE value="small changes" />
     <option name="LAST_COMMIT_MESSAGE" value="small changes" />
   </component>

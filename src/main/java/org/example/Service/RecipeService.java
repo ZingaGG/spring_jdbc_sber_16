@@ -31,11 +31,11 @@ public class RecipeService {
         recipeDAO.deleteRecipe(recipeId);
     }
 
-    public Recipe getRecipeWithIngredients(long recipeId) {
-        return recipeDAO.getRecipeWithIngredients(recipeId);
+    public Recipe getRecipeById(long recipeId) {
+        return recipeDAO.getRecipeById(recipeId);
     }
 
-    public void addIngredientToRecipe(long recipeId, String ingredientName, double quantity) {
-        recipeDAO.addIngredientToRecipe(recipeId, ingredientName, quantity);
+    public boolean addIngredientToRecipe(long recipeId, String ingredientName, double quantity) {
+        return recipeDAO.addIngredientToRecipe(recipeId, ingredientName, quantity);
     }
 }

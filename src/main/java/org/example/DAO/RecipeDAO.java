@@ -2,6 +2,7 @@ package org.example.DAO;
 
 import org.example.Model.Ingredient;
 import org.example.Model.Recipe;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
@@ -26,12 +27,29 @@ public class RecipeDAO {
 
     public List<Recipe> searchRecipesByName(String namePart) {
         String sql = "SELECT * FROM recipes WHERE name LIKE ?";
-        return jdbcTemplate.query(sql, new RecipeRowMapper(), "%" + namePart + "%");
+        return jdbcTemplate.query(sql, (rs, rowNum) -> {
+            long recipeId = rs.getLong("id");
+            String recipeName = rs.getString("name");
+            Recipe recipe = new Recipe(recipeId, recipeName);
+
+            String ingredientsSql = "SELECT * FROM ingredients WHERE recipe_id = ?";
+            List<Ingredient> ingredients = jdbcTemplate.query(ingredientsSql, new IngredientRowMapper(), recipeId);
+            recipe.setIngredients(ingredients);
+
+            return recipe;
+        }, "%" + namePart + "%");
     }
 
-    public Recipe getRecipeWithIngredients(long recipeId) {
+    public Recipe getRecipeById(long recipeId) {
         String recipeSql = "SELECT * FROM recipes WHERE id = ?";
-        Recipe recipe = jdbcTemplate.queryForObject(recipeSql, new RecipeRowMapper(), recipeId);
+        Recipe recipe;
+
+        try{
+            recipe = jdbcTemplate.queryForObject(recipeSql, new RecipeRowMapper(), recipeId);
+        } catch (EmptyResultDataAccessException e) {
+            System.out.println("Recipe with this id does not exist!");
+            return null;
+        }
 
         String ingredientsSql = "SELECT * FROM ingredients WHERE recipe_id = ?";
         List<Ingredient> ingredients = jdbcTemplate.query(ingredientsSql, new IngredientRowMapper(), recipeId);
@@ -40,9 +58,19 @@ public class RecipeDAO {
         return recipe;
     }
 
-    public List<Recipe> getAllRecipes(){
+    public List<Recipe> getAllRecipes() {
         String sql = "SELECT * FROM recipes";
-        return jdbcTemplate.query(sql, new RecipeRowMapper());
+        return jdbcTemplate.query(sql, (rs, rowNum) -> {
+            long recipeId = rs.getLong("id");
+            String recipeName = rs.getString("name");
+            Recipe recipe = new Recipe(recipeId, recipeName);
+
+            String ingredientsSql = "SELECT * FROM ingredients WHERE recipe_id = ?";
+            List<Ingredient> ingredients = jdbcTemplate.query(ingredientsSql, new IngredientRowMapper(), recipeId);
+            recipe.setIngredients(ingredients);
+
+            return recipe;
+        });
     }
 
     public void deleteRecipe(long recipeId) {
@@ -52,9 +80,16 @@ public class RecipeDAO {
         jdbcTemplate.update(deleteRecipeSql, recipeId);
     }
 
-    public void addIngredientToRecipe(long recipeId, String ingredientName, double quantity) {
+    public boolean addIngredientToRecipe(long recipeId, String ingredientName, double quantity) {
+        Recipe recipe = getRecipeById(recipeId);
+
+        if (recipe == null){
+            return false;
+        }
+
         String sql = "INSERT INTO ingredients (recipe_id, ingredient_name, quantity) VALUES (?, ?, ?)";
         jdbcTemplate.update(sql, recipeId, ingredientName, quantity);
+        return true;
     }
 
     private static class RecipeRowMapper implements RowMapper<Recipe> {
