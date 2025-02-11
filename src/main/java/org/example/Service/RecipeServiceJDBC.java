@@ -8,12 +8,12 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class RecipeService {
+public class RecipeServiceJDBC {
 
     private final RecipeDAO recipeDAO;
 
     @Autowired
-    public RecipeService(RecipeDAO recipeDAO) {
+    public RecipeServiceJDBC(RecipeDAO recipeDAO) {
         this.recipeDAO = recipeDAO;
     }
 
